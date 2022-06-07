@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml" xmlns:sec="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header" />
+<body>
+
+  <div th:replace="adminHome :: navbarAdmin"> </div>
+
+  <div class="container page-content">
+    <form th:action="@{/userinformation/edit}" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <legend class="center-block">
+          Edit User Information
+        </legend>
+        
+        <input hidden="hidden" name="id" th:value="${userinformation.id}">
+              
+        <div class="form-group row">
+          <label for="uname" class="col-2 col-form-label text-right">Uname</label>
+          <div class="col-6">
+            <input th:value="${userinformation.uname}" type="text" class="form-control" id="uname" name="uname" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="categoryinfo" class="col-2 col-form-label text-right">Category</label>
+          <div class="col-6">
+            <input type="text" class="form-control" id="categorieinfos" name="categoryinfo" data-role="tagsinput" th:value="${preselectedCategorieinfos}">
+          </div>
+          <div class="col-4">
+            <button type=button class="btn btn-primary btn-category badge badge-pill badge-primary mr-1 mb-1" th:each="item : ${allCategorieinfos}" 
+            th:text="${item}" th:id="item+${categoryinfo}"></button>           
+          </div>          
+        </div>
+        <div class="form-group row">
+          <label for="postal" class="col-2 col-form-label text-right">Provinces</label>
+          <div class="col-6">
+            <input type="text" class="form-control" id="provinces" name="province" data-role="tagsinput" th:value="${preselectedProvinces}">
+          </div>
+          <div class="col-4">
+            <button type=button class="btn btn-primary btn-size" th:each="item : ${#lists.sort(allProvinces)}" th:text="${item}" th:id="province+${item}"></button>           
+          </div>          
+        </div>
+        <div class="form-group row">
+          <label for="postal" class="col-2 col-form-label text-right">Postal</label>
+          <div class="col-6">
+            <input type="text" class="form-control" id="postals" name="postal" data-role="tagsinput" th:value="${preselectedPostals}">
+          </div>
+          <div class="col-4">
+            <button type=button class="btn btn-primary btn-brand badge badge-pill badge-primary mr-1 mb-1"
+            th:text="${#strings.capitalize(item)}" th:id="postal+${item}"></button>           
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="phone" class="col-2 col-form-label text-right">Phone</label>
+          <div class="col-6 input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">+94</span>
+            </div>
+            <input th:value="${userinformation.phone}" type="text" name="phone" 
+          class="form-control" id="phone" placeholder="Enter Phone Number" />
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="umail" class="col-2 col-form-label text-right">User Email</label>
+          <div class="col-6">
+            <input th:value="${userinformation.umail}" type="text"
+                        name="umail" class="form-control" id="umail"
+                        placeholder="mail " />
+          </div>
+        </div>
+        
+        
+        <div class="form-group row">
+          <label for="picture" class="col-2 col-form-label text-right">User Role</label>
+          <div class="col-6">
+            <input th:value="${userinformation.picture}" type="text" class="form-control" id="picture" name="picture" >
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <div class="offset-2 col-6">
+          	<button type="submit" class="btn btn-success">Update User</button>
+              <a class="btn btn-danger" th:href="@{/admin}">Cancel</a>
+          </div>
+        </div>
+    </fieldset>
+  </form>
+  </div>
+
+
+
+  <div th:replace="common/header :: body-scripts"> </div>
+  <script src="/js/tagsinput-custom.js"></script>
+  
+
+</body>
+</html>
+
+

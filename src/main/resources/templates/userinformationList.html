@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml" xmlns:sec="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header" />
+<body>
+
+ <style>
+body {
+  background-image: url("/image/Home Page(5).jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 120%;
+}
+
+
+
+</style> <div class="container page-content">
+    <table id="table-userinformation" class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>User Name</th>
+        <th>Category(Seller)</th>
+       <th>Postal Code</th>
+       <th>Provinces</th>
+        <th>Phone</th>
+        <th>User Email</th>
+        <th>Role</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-th-each="userinformation : ${userinformations}">
+                                     <td th:text="${userinformation.uname}"></td>
+                                      <td><div style="display:flex;"><span th:each="item : ${userinformation.categorieinfos}" 
+                                      th:text="${item.getName()}" class="badge badge-secondary mt-1 mr-1" ></span></div></td>
+       
+       
+         <td><div style="display:flex;"><span th:each="item : ${userinformation.postals}" 
+            th:text="${item.getName()}" class="badge badge-secondary mt-1 mr-1" ></span></div></td>
+             <td><div style="display:flex;"><span th:each="item : ${userinformation.provinces}" 
+            th:text="${item.getValue()}" class="badge badge-secondary mt-1 mr-1" ></span></div></td>
+        <td th:text="${userinformation.phone}"></td>
+        <td th:text="${userinformation.umail}"></td>
+        <td th:text="${userinformation.picture}"></td>
+        <td><a th:href="@{/userinformation/edit?id=}+${userinformation.id}" ><img width="30" height="15" src="/image/user/index1.png"></a>  
+          <a th:href="@{/userinformation/delete?id=}+${userinformation.id}" ><img width="30" height="15" src="/image/user/index.png"></a> </td>
+      
+      </tr>
+    </tbody>
+  </table>
+
+<a class="button button3" th:href="@{/userinformation/export}"> Genarate User Report</a>  </div>
+  <div th:replace="adminHome :: navbarAdmin"> </div>
+  <div th:replace="common/header :: body-scripts"> </div>
+  
+  <script>
+  	$(document).ready(function() {
+	    $('#table-userinformation').DataTable({
+	    	stateSave: true
+	    });
+	} );
+  </script> 
+
+</body>
+</html>
+
